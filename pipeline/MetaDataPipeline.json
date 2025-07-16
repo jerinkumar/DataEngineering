@@ -1,0 +1,42 @@
+{
+	"name": "MetaDataPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "File Metadata",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ContainerMetaData",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems",
+						"itemType",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-05-30T02:00:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

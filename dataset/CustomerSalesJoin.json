@@ -1,0 +1,24 @@
+{
+	"name": "CustomerSalesJoin",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fabric_bronze_blob_storage_link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "CustomerSalesJoin.csv",
+				"container": "fabric-silver"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

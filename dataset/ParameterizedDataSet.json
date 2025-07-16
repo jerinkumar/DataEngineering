@@ -1,0 +1,32 @@
+{
+	"name": "ParameterizedDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fabric_bronze_blob_storage_link",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_Param_FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().DS_Param_FileName",
+					"type": "Expression"
+				},
+				"container": "fabric-bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "unified-fabric-data-factory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1c4e254c-ca28-43ac-a8b2-f3b202fc20d3",
+		"tenantId": "eb74fae3-1c5a-436a-b3b9-8eb475e7b9bc"
+	}
+}

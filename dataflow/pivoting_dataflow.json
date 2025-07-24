@@ -1,5 +1,5 @@
 {
-	"name": "dataflow3",
+	"name": "pivoting_dataflow",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

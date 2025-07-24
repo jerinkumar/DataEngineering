@@ -46,7 +46,7 @@
 				"pivoting derive(SalesNumeric = toFloat(Sales)) ~> derivedColumn1",
 				"PivotedSales sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['pivot_output'],",
+				"     partitionFileNames:['pivot_output.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> sink1"

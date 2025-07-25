@@ -1,0 +1,52 @@
+{
+	"name": "DataEngineersPL",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					},
+					"name": "DataEngineers"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "flatten1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          address as (city as string, zip as string),",
+				"          skills as string[],",
+				"          salary as integer,",
+				"          active as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> DataEngineers",
+				"DataEngineers foldDown(unroll(skills),",
+				"     mapColumn(",
+				"          id,",
+				"          name,",
+				"          address,",
+				"          skills,",
+				"          salary,",
+				"          active",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 derive(address = ERROR_FUNCTION('')) ~> derivedColumn1"
+			]
+		}
+	}
+}

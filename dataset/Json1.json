@@ -1,0 +1,52 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fabric_bronze_blob_storage_link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data_engineers.json",
+				"container": "fabric-bronze"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"name": {
+					"type": "string"
+				},
+				"address": {
+					"type": "object",
+					"properties": {
+						"city": {
+							"type": "string"
+						},
+						"zip": {
+							"type": "string"
+						}
+					}
+				},
+				"skills": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"salary": {
+					"type": "integer"
+				},
+				"active": {
+					"type": "boolean"
+				}
+			}
+		}
+	}
+}

@@ -18,7 +18,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText6",
+						"referenceName": "Json2",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -71,13 +71,8 @@
 				"filter1 sort(desc(salary, true)) ~> sort1",
 				"sort1 alterRow(updateIf(active == true() && skills == 'ADF')) ~> alterRow1",
 				"alterRow1 derive(skills = iif(skills == 'ADF', 'Azure Data Factory', skills)) ~> UpdateSkills",
-				"UpdateSkills sink(allowSchemaDrift: false,",
+				"UpdateSkills sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          Region as string,",
-				"          TotalSalesFeb as string,",
-				"          TotalSalesJan as string",
-				"     ),",
 				"     partitionFileNames:['DataEngineersOutput.json'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",

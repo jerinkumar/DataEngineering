@@ -25,6 +25,12 @@
 				},
 				{
 					"name": "sort1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "UpdateSkills"
 				}
 			],
 			"scriptLines": [
@@ -54,7 +60,9 @@
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 filter(active == true()) ~> filter1",
-				"filter1 sort(desc(salary, true)) ~> sort1"
+				"filter1 sort(desc(salary, true)) ~> sort1",
+				"sort1 alterRow(updateIf(active == true() && skills == 'ADF')) ~> alterRow1",
+				"alterRow1 derive(skills = iif(skills == 'ADF', 'Azure Data Factory', skills)) ~> UpdateSkills"
 			]
 		}
 	}

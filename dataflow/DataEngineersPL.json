@@ -10,6 +10,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "DataEngineers"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -18,7 +21,10 @@
 					"name": "flatten1"
 				},
 				{
-					"name": "ParseAddress"
+					"name": "filter1"
+				},
+				{
+					"name": "sort1"
 				}
 			],
 			"scriptLines": [
@@ -30,10 +36,12 @@
 				"          salary as integer,",
 				"          active as boolean",
 				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> DataEngineers",
+				"     documentForm: 'arrayOfDocuments') ~> DataEngineers",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
 				"DataEngineers foldDown(unroll(skills),",
 				"     mapColumn(",
 				"          id,",
@@ -45,12 +53,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 parse(address = ERROR_FUNCTION(''),",
-				"          each(match()),",
-				"          City = address.city,",
-				"          Zip = address.zip,",
-				"     format: 'json',",
-				"     documentForm: 'documentPerLine') ~> ParseAddress"
+				"flatten1 filter(active == true()) ~> filter1",
+				"filter1 sort(desc(salary, true)) ~> sort1"
 			]
 		}
 	}

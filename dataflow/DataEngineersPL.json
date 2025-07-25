@@ -18,7 +18,7 @@
 					"name": "flatten1"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "ParseAddress"
 				}
 			],
 			"scriptLines": [
@@ -45,7 +45,12 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 derive(address = ERROR_FUNCTION('')) ~> derivedColumn1"
+				"flatten1 parse(address = ERROR_FUNCTION(''),",
+				"          each(match()),",
+				"          City = address.city,",
+				"          Zip = address.zip,",
+				"     format: 'json',",
+				"     documentForm: 'documentPerLine') ~> ParseAddress"
 			]
 		}
 	}
